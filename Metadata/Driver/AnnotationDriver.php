@@ -18,6 +18,8 @@
 
 namespace JMS\SerializerBundle\Metadata\Driver;
 
+use JMS\SerializerBundle\Annotation\Link;
+
 use JMS\SerializerBundle\Annotation\AccessorOrder;
 
 use JMS\SerializerBundle\Annotation\Accessor;
@@ -125,6 +127,8 @@ class AnnotationDriver implements DriverInterface
                         $propertyMetadata->inline = true;
                     } else if ($annot instanceof ReadOnly) {
                         $propertyMetadata->readOnly = true;
+                    } else if ($annot instanceof Link) {
+                        $propertyMetadata->link = true;
                     }
                 }
 

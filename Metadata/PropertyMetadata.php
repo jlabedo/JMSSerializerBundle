@@ -40,6 +40,7 @@ class PropertyMetadata extends BasePropertyMetadata
     public $setter;
     public $inline = false;
     public $readOnly = false;
+    public $link = false;
 
     public function setAccessor($type, $getter = null, $setter = null)
     {
@@ -87,6 +88,7 @@ class PropertyMetadata extends BasePropertyMetadata
             $this->setter,
             $this->inline,
             $this->readOnly,
+            $this->link,
             parent::serialize(),
         ));
     }
@@ -109,6 +111,7 @@ class PropertyMetadata extends BasePropertyMetadata
             $this->setter,
             $this->inline,
             $this->readOnly,
+            $this->link,
             $parentStr
         ) = unserialize($str);
 
