@@ -30,6 +30,17 @@ class DoctrineProxyHandler implements SerializationHandlerInterface
         if (($data instanceof Proxy || $data instanceof ORMProxy) && (!$data->__isInitialized__ || get_class($data) === $type)) {
             $handled = true;
 
+            if($visitor instanceof JsonSerializationVisitor)
+            {
+                // Invoking getId should not invoke __load() (see Proxy Class)
+                // TODO: make annotation where we want a link or the data (@Link)
+                // TODO: id is not always the identifier.
+                $rs = array('$rel' => $data->getId());
+                $navigator = $visitor->getNavigator();
+                $navigator->detachObject($data);
+                return $navigator->accept($rs, null, $visitor);
+            }
+            
             if (!$data->__isInitialized__) {
                 $data->__load();
             }
